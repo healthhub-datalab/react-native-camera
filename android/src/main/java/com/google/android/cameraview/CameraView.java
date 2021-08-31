@@ -288,6 +288,16 @@ public class CameraView extends FrameLayout {
         setPictureSize(ss.pictureSize);
     }
 
+    public boolean checkIfCamera2IsSupported() {
+        if (Build.VERSION.SDK_INT < 21) {
+            return false;
+        }
+        if (!Camera2.isLegacy(mContext)) {
+            return true;
+        }
+        return false;
+    }
+
     public void setUsingCamera2Api(boolean useCamera2) {
         if (Build.VERSION.SDK_INT < 21) {
             return;
