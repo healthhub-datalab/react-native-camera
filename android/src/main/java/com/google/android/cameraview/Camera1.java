@@ -1736,7 +1736,7 @@ class Camera1 extends CameraViewImpl implements MediaRecorder.OnInfoListener,
                     max_fps = row[1];
                 }
             }
-            compatible_fps = max_fps;
+            compatible_fps = max_fps / 1000;
         } else {
             compatible_fps = isCompatibleWithDevice(fps) ? fps : profile.videoFrameRate;
         }

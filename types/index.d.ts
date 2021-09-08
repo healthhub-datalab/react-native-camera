@@ -491,7 +491,8 @@ export class RNCamera extends Component<RNCameraProps & ViewProperties> {
 
   /** Android only */
   getSupportedRatiosAsync(): Promise<string[]>;
-  getSupportedPreviewFpsRange: Promise<string[]>;
+  getSupportedPreviewFpsRange(): Promise<string[]>;
+  checkIfCamera2IsSupported(): Promise<boolean>;
   static checkIfVideoIsValid: Promise<boolean>;
 
   /** iOS only */

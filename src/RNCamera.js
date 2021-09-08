@@ -572,11 +572,19 @@ export default class Camera extends React.Component<PropsType, StateType> {
     }
   }
 
-  getSupportedPreviewFpsRange = async (): Promise<[]> => {
+  getSupportedPreviewFpsRange = async (): Promise<string[]> => {
     if (Platform.OS === 'android') {
       return await CameraManager.getSupportedPreviewFpsRange(this._cameraHandle);
     } else {
       throw new Error('getSupportedPreviewFpsRange is not supported on iOS');
+    }
+  };
+
+  checkIfCamera2IsSupported = async (): Promise<boolean> => {
+    if (Platform.OS === 'android') {
+      return await CameraManager.checkIfCamera2IsSupported(this._cameraHandle);
+    } else {
+      throw new Error('checkIfCamera2IsSupported is not supported on iOS');
     }
   };
 

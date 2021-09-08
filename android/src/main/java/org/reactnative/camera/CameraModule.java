@@ -540,4 +540,25 @@ public class CameraModule extends ReactContextBaseJavaModule {
       }
     }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
+
+  @ReactMethod
+  public void checkIfCamera2IsSupported(final int viewTag, final Promise promise) {
+      final ReactApplicationContext context = getReactApplicationContext();
+      UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
+      uiManager.addUIBlock(new UIBlock() {
+          @Override
+          public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
+              final RNCameraView cameraView;
+
+              try {
+                  cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+                  boolean result = cameraView.checkIfCamera2IsSupported();
+                  promise.resolve(result);
+              } catch (Exception e) {
+                  e.printStackTrace();
+                  promise.reject("E_CAMERA_BAD_VIEWTAG", "checkIfCamera2IsSupported: Expected a Camera component");
+              }
+          }
+      });
+  }
 }
